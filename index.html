@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master DSA & JS 120 - Interactive Progress & Time Tracker</title>
+  <title>Master DSA & Full-Stack JavaScript 315 - Multi-Language Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -62,6 +62,29 @@
       position: relative;
     }
 
+    .top-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .lang-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+    }
+
+    .lang-selector label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
     .badge-top {
       display: inline-flex;
       align-items: center;
@@ -79,7 +102,7 @@
     }
 
     h1 {
-      font-size: 2.75rem;
+      font-size: 2.6rem;
       font-weight: 800;
       background: linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, var(--accent-green) 100%);
       -webkit-background-clip: text;
@@ -90,8 +113,8 @@
 
     p.subtitle {
       color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 650px;
+      font-size: 1.05rem;
+      max-width: 720px;
       margin: 0 auto;
     }
 
@@ -621,23 +644,35 @@
 <body>
 
   <div class="container">
+    <!-- TOP TOOLBAR (LANG & SETTINGS) -->
+    <div class="top-toolbar">
+      <div class="lang-selector">
+        <label for="lang-select">🌐 Language / 语言 / Sprache:</label>
+        <select id="lang-select" onchange="changeLanguage(this.value)">
+          <option value="en">🇬🇧 English</option>
+          <option value="de">🇩🇪 Deutsch</option>
+          <option value="zh">🇨🇳 中文</option>
+        </select>
+      </div>
+    </div>
+
     <!-- HEADER -->
     <header>
       <div class="badge-top">
-        <span>⚡ 120 DSA & JS Target Roadmap</span>
+        <span id="txt-badge">⚡ 315 DSA & JS Target Roadmap</span>
       </div>
-      <h1>Master DSA & JavaScript 120</h1>
-      <p class="subtitle">Track solved DSA problems & essential JavaScript Array Methods, monitor remaining topics, and calculate your completion time in real-time!</p>
+      <h1 id="txt-title">Master DSA & JavaScript 315</h1>
+      <p class="subtitle" id="txt-subtitle">Track solved DSA problems, JS methods, DOM APIs, and advanced web dev concepts. Calculate your completion time in real-time!</p>
     </header>
 
     <!-- STATS DASHBOARD -->
     <div class="dashboard-grid">
       <div class="stat-card">
         <div class="stat-label">
-          <span>Completed Items</span>
+          <span id="lbl-completed">Completed Items</span>
           <span>🎯</span>
         </div>
-        <div class="stat-value" id="stat-completed">0 <span style="font-size: 1.1rem; color: var(--text-muted);">/ 120</span></div>
+        <div class="stat-value" id="stat-completed">0 <span style="font-size: 1.1rem; color: var(--text-muted);">/ 315</span></div>
         <div class="stat-sub" id="stat-percent-text">0% Completed</div>
         <div class="overall-progress-box">
           <div class="overall-progress-bar" id="overall-bar"></div>
@@ -646,19 +681,19 @@
 
       <div class="stat-card">
         <div class="stat-label">
-          <span>Remaining Items</span>
+          <span id="lbl-remaining">Remaining Items</span>
           <span>⏳</span>
         </div>
-        <div class="stat-value" id="stat-remaining" style="color: var(--accent-cyan);">120</div>
-        <div class="stat-sub">Problems & methods left to master</div>
+        <div class="stat-value" id="stat-remaining" style="color: var(--accent-cyan);">315</div>
+        <div class="stat-sub" id="lbl-remaining-sub">Problems & concepts left</div>
       </div>
 
       <div class="stat-card">
         <div class="stat-label">
-          <span>Est. Time Remaining</span>
+          <span id="lbl-time-left">Est. Time Remaining</span>
           <span>⏱️</span>
         </div>
-        <div class="stat-value" id="stat-time-left" style="color: var(--accent-purple);">50h 0m</div>
+        <div class="stat-value" id="stat-time-left" style="color: var(--accent-purple);">131h 15m</div>
         <div class="stat-sub" id="stat-time-sub">Based on ~25 mins/item</div>
       </div>
     </div>
@@ -666,18 +701,18 @@
     <!-- TIME ESTIMATOR CONTROLLER -->
     <div class="time-settings-card">
       <div class="time-settings-info">
-        <h3>⏱️ Dynamic Completion Time Estimator</h3>
-        <p>Select your average solving time per problem/method to see estimated hours left.</p>
+        <h3 id="txt-time-heading">⏱️ Dynamic Completion Time Estimator</h3>
+        <p id="txt-time-sub">Select your average solving time per problem/concept to see estimated hours left.</p>
       </div>
       <div class="time-controls">
-        <label for="time-per-q">Avg Time / Item:</label>
+        <label for="time-per-q" id="lbl-avg-time">Avg Time / Item:</label>
         <select id="time-per-q" onchange="updateEstimates()">
-          <option value="15">15 Minutes (Fast)</option>
-          <option value="20">20 Minutes</option>
-          <option value="25" selected>25 Minutes (Standard)</option>
-          <option value="30">30 Minutes (Thorough)</option>
-          <option value="45">45 Minutes (Hard/Deep)</option>
-          <option value="60">60 Minutes (1 Hr/item)</option>
+          <option value="15">15 Min (Fast)</option>
+          <option value="20">20 Min</option>
+          <option value="25" selected>25 Min (Standard)</option>
+          <option value="30">30 Min (Thorough)</option>
+          <option value="45">45 Min (Deep Dive)</option>
+          <option value="60">60 Min (1 Hr/item)</option>
         </select>
       </div>
     </div>
@@ -686,20 +721,20 @@
     <div class="filter-bar">
       <div class="search-box">
         <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        <input type="text" id="search-input" placeholder="Search any question or method (e.g. Binary Search, map, reduce)..." onkeyup="filterQuestions()">
+        <input type="text" id="search-input" placeholder="Search any question, method or concept..." onkeyup="filterQuestions()">
       </div>
 
       <div class="filter-group">
         <select id="status-filter" onchange="filterQuestions()">
-          <option value="all">All Status</option>
-          <option value="completed">Completed Only</option>
-          <option value="pending">Pending Only</option>
+          <option value="all" id="opt-all">All Status</option>
+          <option value="completed" id="opt-completed">Completed Only</option>
+          <option value="pending" id="opt-pending">Pending Only</option>
         </select>
 
-        <button class="btn btn-green" onclick="exportData()">💾 Export JSON</button>
-        <button class="btn" onclick="importDataTrigger()">📥 Import JSON</button>
+        <button class="btn btn-green" onclick="exportData()" id="btn-export">💾 Export JSON</button>
+        <button class="btn" onclick="importDataTrigger()" id="btn-import">📥 Import JSON</button>
         <input type="file" id="import-file" style="display: none;" accept=".json" onchange="handleImportFile(event)">
-        <button class="btn btn-danger" onclick="resetAll()">🔄 Reset All</button>
+        <button class="btn btn-danger" onclick="resetAll()" id="btn-reset">🔄 Reset All</button>
       </div>
     </div>
 
@@ -708,7 +743,7 @@
 
     <!-- FOOTER -->
     <footer>
-      <p>DSA & JavaScript 120 Tracker • Designed for Maximum Productivity 🚀</p>
+      <p id="txt-footer">DSA & Full-Stack JavaScript 315 Tracker • Designed for Global Mastery 🚀</p>
     </footer>
   </div>
 
@@ -719,206 +754,351 @@
         <div class="modal-title" id="modal-q-title">Notes / Solution Code</div>
         <button class="modal-close" onclick="closeNotesModal()">&times;</button>
       </div>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Save solution code, key logic takeaways, or syntax notes here for this item.</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;" id="modal-sub">Save solution code, key logic takeaways, or syntax notes here.</p>
       <textarea class="notes-textarea" id="modal-q-notes" placeholder="// Write your code solution, method examples, or notes here..."></textarea>
       <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button class="btn" onclick="closeNotesModal()">Cancel</button>
-        <button class="btn btn-green" onclick="saveNotes()">Save Notes</button>
+        <button class="btn" onclick="closeNotesModal()" id="btn-modal-cancel">Cancel</button>
+        <button class="btn btn-green" onclick="saveNotes()" id="btn-modal-save">Save Notes</button>
       </div>
     </div>
   </div>
 
   <script>
-    // COMPLETE 120 DSA QUESTIONS & JS METHODS DATASET
+    // I18N DICTIONARY FOR EN, DE, ZH
+    const i18nDict = {
+      en: {
+        badge: "⚡ 315 DSA & JS Target Roadmap",
+        title: "Master DSA & JavaScript 315",
+        subtitle: "Track solved DSA problems, JS methods, DOM APIs, and advanced web dev concepts. Calculate your completion time in real-time!",
+        lblCompleted: "Completed Items",
+        lblRemaining: "Remaining Items",
+        lblRemainingSub: "Problems & concepts left",
+        lblTimeLeft: "Est. Time Remaining",
+        timeHeading: "⏱️ Dynamic Completion Time Estimator",
+        timeSub: "Select your average solving time per problem/concept to see estimated hours left.",
+        avgTime: "Avg Time / Item:",
+        searchPlaceholder: "Search any question, method or concept...",
+        optAll: "All Status",
+        optCompleted: "Completed Only",
+        optPending: "Pending Only",
+        btnExport: "💾 Export JSON",
+        btnImport: "📥 Import JSON",
+        btnReset: "🔄 Reset All",
+        txtFooter: "DSA & Full-Stack JavaScript 315 Tracker • Designed for Global Mastery 🚀",
+        modalSub: "Save solution code, key logic takeaways, or syntax notes here.",
+        btnCancel: "Cancel",
+        btnSave: "Save Notes",
+        addNotes: "📝 Add Notes",
+        editNotes: "📝 Edit Notes",
+        solvedBadge: "Solved"
+      },
+      de: {
+        badge: "⚡ 315 DSA & JS Ziel-Roadmap",
+        title: "DSA & JavaScript 315 Meistern",
+        subtitle: "Verfolgen Sie gelöste DSA-Probleme, JS-Methoden, DOM-APIs und fortgeschrittene Web-Konzepte in Echtzeit!",
+        lblCompleted: "Abgeschlossen",
+        lblRemaining: "Verbleibend",
+        lblRemainingSub: "Verbleibende Aufgaben & Konzepte",
+        lblTimeLeft: "Geschätzte Restzeit",
+        timeHeading: "⏱️ Dynamischer Fertigstellungsrechner",
+        timeSub: "Wählen Sie Ihre durchschnittliche Bearbeitungszeit pro Aufgabe.",
+        avgTime: "Avg Zeit / Thema:",
+        searchPlaceholder: "Suchen Sie nach Aufgaben, Methoden oder Konzepten...",
+        optAll: "Alle Status",
+        optCompleted: "Nur Abgeschlossen",
+        optPending: "Nur Ausstehend",
+        btnExport: "💾 JSON Exportieren",
+        btnImport: "📥 JSON Importieren",
+        btnReset: "🔄 Alles Zurücksetzen",
+        txtFooter: "DSA & JavaScript 315 Tracker • Entwickelt für weltweiten Erfolg 🚀",
+        modalSub: "Speichern Sie hier Lösungscode, wichtige Erkenntnisse oder Notizen.",
+        btnCancel: "Abbrechen",
+        btnSave: "Notizen Speichern",
+        addNotes: "📝 Notiz Hinzufügen",
+        editNotes: "📝 Notiz Bearbeiten",
+        solvedBadge: "Gelöst"
+      },
+      zh: {
+        badge: "⚡ 315 DSA 与 JS 终极路线图",
+        title: "掌握 DSA 与 全栈 JavaScript 315",
+        subtitle: "实时跟踪已解决的算法题、JS 原生方法、DOM API 及高级 Web 开发概念，实时计算剩余完成时间！",
+        lblCompleted: "已完成项目",
+        lblRemaining: "剩余项目",
+        lblRemainingSub: "待完成题目与概念",
+        lblTimeLeft: "预计剩余时间",
+        timeHeading: "⏱️ 动态完成时间估算器",
+        timeSub: "选择每道题/概念的平均解题时间，实时计算剩余总小时数。",
+        avgTime: "平均用时/项:",
+        searchPlaceholder: "搜索任何题目、方法或概念 (例如 Binary Search, map, Promise)...",
+        optAll: "所有状态",
+        optCompleted: "仅看已完成",
+        optPending: "仅看未完成",
+        btnExport: "💾 导出 JSON",
+        btnImport: "📥 导入 JSON",
+        btnReset: "🔄 重置所有",
+        txtFooter: "DSA & 全栈 JavaScript 315 学习追踪器 • 为全球开发者倾情打造 🚀",
+        modalSub: "在此保存解题代码、核心逻辑心得或语法笔记。",
+        btnCancel: "取消",
+        btnSave: "保存笔记",
+        addNotes: "📝 添加笔记",
+        editNotes: "📝 编辑笔记",
+        solvedBadge: "已完成"
+      }
+    };
+
+    // COMPLETE 315 ITEMS DATASET (18 CATEGORIES)
     const dsaData = [
       {
-        category: "1. Arrays",
+        category: "1. DSA: Arrays",
         icon: "🔹",
         questions: [
-          "01. Find the largest element.",
-          "02. Find the smallest element.",
-          "03. Find the second largest element.",
-          "04. Find the second smallest element.",
-          "05. Reverse an array.",
-          "06. Check if an array is sorted.",
-          "07. Find the sum of all elements.",
-          "08. Find the average of array elements.",
-          "09. Search an element (Linear Search).",
-          "10. Binary Search.",
-          "11. Count even and odd numbers.",
-          "12. Move all zeros to the end.",
-          "13. Move all negative numbers to the beginning.",
-          "14. Remove duplicate elements from a sorted array.",
-          "15. Rotate an array left by one position.",
-          "16. Rotate an array right by one position.",
-          "17. Find the missing number.",
-          "18. Find duplicate elements.",
-          "19. Merge two sorted arrays.",
+          "01. Find the largest element.", "02. Find the smallest element.", "03. Find the second largest element.",
+          "04. Find the second smallest element.", "05. Reverse an array.", "06. Check if an array is sorted.",
+          "07. Find the sum of all elements.", "08. Find the average of array elements.", "09. Search an element (Linear Search).",
+          "10. Binary Search.", "11. Count even and odd numbers.", "12. Move all zeros to the end.",
+          "13. Move all negative numbers to the beginning.", "14. Remove duplicate elements from a sorted array.",
+          "15. Rotate an array left by one position.", "16. Rotate an array right by one position.",
+          "17. Find the missing number.", "18. Find duplicate elements.", "19. Merge two sorted arrays.",
           "20. Find the frequency of each element."
         ]
       },
       {
-        category: "2. Strings",
+        category: "2. DSA: Strings",
         icon: "🔤",
         questions: [
-          "01. Reverse a string.",
-          "02. Check palindrome string.",
-          "03. Count vowels.",
-          "04. Count consonants.",
-          "05. Count words.",
-          "06. Count characters.",
-          "07. Remove spaces.",
-          "08. Remove duplicate characters.",
-          "09. Find frequency of characters.",
-          "10. Find first non-repeating character.",
-          "11. Check anagram.",
-          "12. Convert lowercase to uppercase.",
-          "13. Convert uppercase to lowercase.",
-          "14. Capitalize first letter of every word.",
+          "01. Reverse a string.", "02. Check palindrome string.", "03. Count vowels.", "04. Count consonants.",
+          "05. Count words.", "06. Count characters.", "07. Remove spaces.", "08. Remove duplicate characters.",
+          "09. Find frequency of characters.", "10. Find first non-repeating character.", "11. Check anagram.",
+          "12. Convert lowercase to uppercase.", "13. Convert uppercase to lowercase.", "14. Capitalize first letter of every word.",
           "15. Find the longest word in a sentence."
         ]
       },
       {
-        category: "3. Numbers & Math Logic",
+        category: "3. DSA: Numbers & Math Logic",
         icon: "🔢",
         questions: [
-          "01. Check even or odd.",
-          "02. Find the largest of two numbers.",
-          "03. Find the largest of three numbers.",
-          "04. Swap two numbers.",
-          "05. Reverse a number.",
-          "06. Count digits.",
-          "07. Sum of digits.",
-          "08. Check palindrome number.",
-          "09. Check Armstrong number.",
-          "10. Check prime number.",
-          "11. Print all prime numbers in a range.",
-          "12. Find factorial.",
-          "13. Print Fibonacci series.",
-          "14. Check perfect number.",
-          "15. Check strong number.",
-          "16. Find GCD (HCF).",
-          "17. Find LCM.",
-          "18. Check leap year.",
-          "19. Find power without Math.pow().",
-          "20. Print multiplication table."
+          "01. Check even or odd.", "02. Find the largest of two numbers.", "03. Find the largest of three numbers.",
+          "04. Swap two numbers.", "05. Reverse a number.", "06. Count digits.", "07. Sum of digits.",
+          "08. Check palindrome number.", "09. Check Armstrong number.", "10. Check prime number.",
+          "11. Print all prime numbers in a range.", "12. Find factorial.", "13. Print Fibonacci series.",
+          "14. Check perfect number.", "15. Check strong number.", "16. Find GCD (HCF).", "17. Find LCM.",
+          "18. Check leap year.", "19. Find power without Math.pow().", "20. Print multiplication table."
         ]
       },
       {
-        category: "4. Patterns Printing",
+        category: "4. DSA: Patterns Printing",
         icon: "📐",
         questions: [
-          "01. Square star pattern.",
-          "02. Hollow square.",
-          "03. Right triangle.",
-          "04. Inverted triangle.",
-          "05. Pyramid.",
-          "06. Inverted pyramid.",
-          "07. Diamond.",
-          "08. Floyd's triangle.",
-          "09. Pascal triangle.",
-          "10. Number pyramid.",
-          "11. Number triangle.",
-          "12. Character triangle.",
-          "13. Hollow pyramid.",
-          "14. X pattern.",
-          "15. Butterfly pattern."
+          "01. Square star pattern.", "02. Hollow square.", "03. Right triangle.", "04. Inverted triangle.",
+          "05. Pyramid.", "06. Inverted pyramid.", "07. Diamond.", "08. Floyd's triangle.", "09. Pascal triangle.",
+          "10. Number pyramid.", "11. Number triangle.", "12. Character triangle.", "13. Hollow pyramid.",
+          "14. X pattern.", "15. Butterfly pattern."
         ]
       },
       {
-        category: "5. Recursion",
+        category: "5. DSA: Recursion",
         icon: "🔄",
         questions: [
-          "01. Print numbers from 1 to N.",
-          "02. Print numbers from N to 1.",
-          "03. Find factorial using recursion.",
-          "04. Fibonacci using recursion.",
-          "05. Sum of first N numbers.",
-          "06. Reverse a string using recursion.",
-          "07. Reverse an array using recursion.",
-          "08. Check palindrome using recursion.",
-          "09. Binary Search using recursion.",
-          "10. Power of a number using recursion."
+          "01. Print numbers from 1 to N.", "02. Print numbers from N to 1.", "03. Find factorial using recursion.",
+          "04. Fibonacci using recursion.", "05. Sum of first N numbers.", "06. Reverse a string using recursion.",
+          "07. Reverse an array using recursion.", "08. Check palindrome using recursion.",
+          "09. Binary Search using recursion.", "10. Power of a number using recursion."
         ]
       },
       {
-        category: "6. Sorting Algorithms",
+        category: "6. DSA: Sorting Algorithms",
         icon: "🔀",
         questions: [
-          "01. Bubble Sort.",
-          "02. Selection Sort.",
-          "03. Insertion Sort.",
-          "04. Merge Sort.",
-          "05. Quick Sort.",
-          "06. Count comparisons in Bubble Sort.",
-          "07. Stable vs Unstable Sorting concept.",
-          "08. Sort 0s and 1s.",
-          "09. Sort 0s, 1s, and 2s (Dutch National Flag).",
-          "10. Merge two sorted arrays."
+          "01. Bubble Sort.", "02. Selection Sort.", "03. Insertion Sort.", "04. Merge Sort.", "05. Quick Sort.",
+          "06. Count comparisons in Bubble Sort.", "07. Stable vs Unstable Sorting.", "08. Sort 0s and 1s.",
+          "09. Sort 0s, 1s, and 2s (Dutch National Flag).", "10. Merge two sorted arrays."
         ]
       },
       {
-        category: "7. Searching Algorithms",
+        category: "7. DSA: Searching Algorithms",
         icon: "🔍",
         questions: [
-          "01. Linear Search.",
-          "02. Binary Search.",
-          "03. First occurrence using Binary Search.",
-          "04. Last occurrence using Binary Search.",
-          "05. Count occurrences using Binary Search."
+          "01. Linear Search.", "02. Binary Search.", "03. First occurrence using Binary Search.",
+          "04. Last occurrence using Binary Search.", "05. Count occurrences using Binary Search."
         ]
       },
       {
-        category: "8. Hashing",
+        category: "8. DSA: Hashing",
         icon: "🗺️",
         questions: [
-          "01. Frequency of array elements.",
-          "02. Frequency of characters.",
-          "03. Find duplicates using HashMap / Object.",
-          "04. First unique element.",
-          "05. Two Sum problem."
+          "01. Frequency of array elements.", "02. Frequency of characters.", "03. Find duplicates using HashMap.",
+          "04. First unique element.", "05. Two Sum problem."
         ]
       },
       {
-        category: "9. JavaScript Array Methods",
+        category: "9. JS: Basics, Variables & Control Flow",
         icon: "🟨",
         questions: [
-          "[Part 1] push() - Add element to end",
-          "[Part 1] pop() - Remove element from end",
-          "[Part 1] shift() - Remove element from start",
-          "[Part 1] unshift() - Add element to start",
-          "[Part 1] includes() - Check if element exists",
-          "[Part 2] indexOf() - Find first index of element",
-          "[Part 2] lastIndexOf() - Find last index of element",
-          "[Part 2] find() - Find first element matching condition",
-          "[Part 2] findIndex() - Find index of first element matching condition",
-          "[Part 2] forEach() - Iterate over array elements",
-          "[Part 3] map() - Transform array elements into new array",
-          "[Part 3] filter() - Filter elements matching condition",
-          "[Part 3] reduce() - Accumulate elements into single value",
-          "[Part 3] every() - Check if ALL elements satisfy condition",
-          "[Part 3] some() - Check if AT LEAST ONE element satisfies condition",
-          "[Part 4] reverse() - Reverse array in place",
-          "[Part 4] sort() - Sort array in place",
-          "[Part 4] slice() - Return copy of a portion of an array",
-          "[Part 4] splice() - Add/remove/replace elements in place",
-          "[Part 4] concat() - Merge two or more arrays"
+          "Variables (var, let, const)", "Data Types (Primitive & Reference)", "Operators (Arithmetic, Logical, Comparison)",
+          "Type Conversion & Coercion", "Template Literals (${var})", "Input / Output (console, prompt)", "Comments",
+          "if, else, else if", "switch Statement", "Loops (for, while, do-while)", "break Statement", "continue Statement"
+        ]
+      },
+      {
+        category: "10. JS: Functions, Arrow & Scope",
+        icon: "⚡",
+        questions: [
+          "Function Declaration", "Function Expression", "Arrow Functions (() => {})", "Default Parameters",
+          "Rest Parameters (...args)", "Spread Operator (...arr)", "Callback Functions", "Higher Order Functions (HOF)",
+          "Pure vs Impure Functions", "Global Scope", "Function Scope", "Block Scope", "Lexical Scope", "Temporal Dead Zone (TDZ)"
+        ]
+      },
+      {
+        category: "11. JS: Objects, Classes & OOP",
+        icon: "📦",
+        questions: [
+          "Creating Objects & Literals", "Accessing Properties (Dot vs Bracket)", "Object Methods", "Object Destructuring",
+          "Nested Objects", "Optional Chaining (?.)", "Nullish Coalescing (??)", "Object.keys()", "Object.values()",
+          "Object.entries()", "Object.assign()", "Object.freeze()", "Object.seal()", "Classes & Constructor",
+          "extends & super Keywords", "static Methods & Properties", "Getters & Setters"
+        ]
+      },
+      {
+        category: "12. JS: Array & String Built-in Methods",
+        icon: "🛠️",
+        questions: [
+          "Array: push, pop", "Array: shift, unshift", "Array: splice, slice", "Array: concat, join",
+          "Array: reverse, sort, fill, at", "Array: map, filter, reduce", "Array: find, findIndex", "Array: some, every",
+          "Array: includes, indexOf, lastIndexOf", "Array: flat, flatMap, forEach", "String: slice, substring, substr",
+          "String: split, join", "String: replace, replaceAll", "String: trim, trimStart, trimEnd",
+          "String: toUpperCase, toLowerCase", "String: charAt, charCodeAt", "String: includes, startsWith, endsWith"
+        ]
+      },
+      {
+        category: "13. JS: Execution Context, Closures & this",
+        icon: "🧠",
+        questions: [
+          "Global Execution Context (GEC)", "Function Execution Context (FEC)", "Call Stack", "Memory Creation Phase (Hoisting)",
+          "Execution Phase", "Variable Hoisting", "Function Hoisting", "Closures & Lexical Environment",
+          "Private Variables & Data Hiding", "this in Global Context", "this in Function Context", "this in Object Context",
+          "this in Arrow Functions", "call() Method", "apply() Method", "bind() Method"
+        ]
+      },
+      {
+        category: "14. JS: Async, Event Loop & Fetch API",
+        icon: "⏳",
+        questions: [
+          "Asynchronous JavaScript Overview", "Call Stack & Web APIs", "Callback Queue (Task Queue)",
+          "Microtask vs Macrotask Queue", "Event Loop Execution Order", "setTimeout & clearTimeout",
+          "setInterval & clearInterval", "Promises (new Promise())", "Promise States (Pending, Fulfilled, Rejected)",
+          "Promise Chaining (.then, .catch, .finally)", "Promise.all()", "Promise.allSettled()", "Promise.any()",
+          "Promise.race()", "async / await Syntax", "try/catch Error Handling in async", "Fetch API (fetch())",
+          "GET Request", "POST Request with JSON", "PUT & PATCH Requests", "DELETE Request", "Headers & Auth Tokens",
+          "Request & Response Objects", "Network Error Handling"
+        ]
+      },
+      {
+        category: "15. DOM: Selection, Manipulation & Events",
+        icon: "🌐",
+        questions: [
+          "DOM Intro & Tree Structure", "getElementById()", "getElementsByClassName()", "getElementsByTagName()",
+          "querySelector & querySelectorAll", "innerHTML vs innerText vs textContent", "Modifying Style (element.style)",
+          "classList (add, remove, toggle)", "setAttribute, getAttribute, removeAttribute", "createElement()",
+          "append & appendChild", "prepend, before, after", "remove & replaceChild", "Traversing: parentNode & parentElement",
+          "Traversing: children, firstElementChild, lastElementChild", "Traversing: nextElementSibling, previousElementSibling",
+          "closest() Method", "addEventListener & removeEventListener", "Event Object (target, type)",
+          "Mouse Events (click, dblclick, mouseover)", "Keyboard Events (keydown, keyup)", "Form & Input Events (input, change)",
+          "Submit Event & preventDefault()", "Event Bubbling", "Event Capturing (Trickling)", "Event Delegation Pattern",
+          "stopPropagation() & stopImmediatePropagation()"
+        ]
+      },
+      {
+        category: "16. Web: Math, Date, JSON, Regex & Storage",
+        icon: "🧮",
+        questions: [
+          "Math: round, floor, ceil", "Math: random & Range", "Math: max, min, abs", "Math: pow, sqrt",
+          "Date: new Date() & Timestamps", "Date: getFullYear, getMonth, getDate", "Date: getHours, getMinutes, getSeconds",
+          "Date: setDate, setMonth, setFullYear", "Date Formatting", "JSON.stringify()", "JSON.parse()",
+          "try, catch, finally", "throw & Custom Errors", "localStorage (setItem, getItem, clear)", "sessionStorage",
+          "Cookies Basics", "for...of Loop", "for...in Loop", "RegExp Constructor & Literals", "Regex Flags (g, i, m)",
+          "regex.test() & regex.exec()", "string.match() & matchAll()", "string.replace() with Regex", "ES6 Modules: import/export"
+        ]
+      },
+      {
+        category: "17. Advanced: Set, Map, Proxy, Memory & Generators",
+        icon: "🔬",
+        questions: [
+          "Set (add, delete, has, clear, size)", "Map (set, get, has, delete, clear, size)", "WeakSet & Memory Leaks",
+          "WeakMap Concept", "Prototype & __proto__", "Prototype Chain & Inheritance", "Stack vs Heap Memory",
+          "Primitive vs Reference Storage", "IIFE (Immediately Invoked Function)", "Function Recursion", "Currying (f(a)(b)(c))",
+          "Function Borrowing", "Generators (function*, yield)", "Custom Iterators & Symbol.iterator", "Symbol Data Type",
+          "BigInt Data Type", "hasOwnProperty()", "Object.create()", "Object.fromEntries()", "Object.hasOwn()",
+          "Reflect API", "Proxy Object (new Proxy())", "Proxy Traps (get, set, has)"
+        ]
+      },
+      {
+        category: "18. Top JS Interview Core Questions",
+        icon: "🎯",
+        questions: [
+          "var vs let vs const", "== vs === (Loose vs Strict)", "null vs undefined", "map() vs forEach()",
+          "slice() vs splice()", "call() vs apply() vs bind()", "Promise vs async/await", "Event Loop Architecture",
+          "Closure Deep Dive", "Hoisting Deep Dive", "Scope & Scope Chain", "this Keyword Behavior Summary",
+          "Prototype & Prototype Chain", "Shallow Copy vs Deep Copy", "Debounce vs Throttle Functions",
+          "Microtask vs Macrotask Queue", "Event Delegation Pattern", "Arrow Function vs Normal Function"
         ]
       }
     ];
 
-    // STATE MANAGEMENT
+    // STATE & I18N
+    let currentLang = "en";
     let userState = {
-      completed: {}, // id: boolean
-      notes: {}      // id: text string
+      completed: {},
+      notes: {}
     };
 
     let activeQuestionId = null;
+    const STORAGE_KEY = "DSA_315_TRACKER_STATE_V3";
 
-    // LOCAL STORAGE KEY
-    const STORAGE_KEY = "DSA_120_TRACKER_STATE_V2";
+    function changeLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("DSA_LANG_PREF", lang);
+      applyTranslations();
+    }
+
+    function applyTranslations() {
+      const t = i18nDict[currentLang] || i18nDict.en;
+      document.getElementById("lang-select").value = currentLang;
+      document.getElementById("txt-badge").innerText = t.badge;
+      document.getElementById("txt-title").innerText = t.title;
+      document.getElementById("txt-subtitle").innerText = t.subtitle;
+
+      document.getElementById("lbl-completed").innerText = t.lblCompleted;
+      document.getElementById("lbl-remaining").innerText = t.lblRemaining;
+      document.getElementById("lbl-remaining-sub").innerText = t.lblRemainingSub;
+      document.getElementById("lbl-time-left").innerText = t.lblTimeLeft;
+
+      document.getElementById("txt-time-heading").innerText = t.timeHeading;
+      document.getElementById("txt-time-sub").innerText = t.timeSub;
+      document.getElementById("lbl-avg-time").innerText = t.avgTime;
+
+      document.getElementById("search-input").placeholder = t.searchPlaceholder;
+      document.getElementById("opt-all").innerText = t.optAll;
+      document.getElementById("opt-completed").innerText = t.optCompleted;
+      document.getElementById("opt-pending").innerText = t.optPending;
+
+      document.getElementById("btn-export").innerText = t.btnExport;
+      document.getElementById("btn-import").innerText = t.btnImport;
+      document.getElementById("btn-reset").innerText = t.btnReset;
+
+      document.getElementById("txt-footer").innerText = t.txtFooter;
+      document.getElementById("modal-sub").innerText = t.modalSub;
+      document.getElementById("btn-modal-cancel").innerText = t.btnCancel;
+      document.getElementById("btn-modal-save").innerText = t.btnSave;
+
+      renderTopics();
+    }
 
     function loadState() {
+      const savedLang = localStorage.getItem("DSA_LANG_PREF");
+      if (savedLang && i18nDict[savedLang]) {
+        currentLang = savedLang;
+      }
+
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         try {
@@ -938,8 +1118,9 @@
       return `cat_${catIndex}_q_${qIndex}`;
     }
 
-    // RENDER QUESTIONS
+    // RENDER TOPICS
     function renderTopics() {
+      const t = i18nDict[currentLang] || i18nDict.en;
       const container = document.getElementById("topics-container");
       container.innerHTML = "";
 
@@ -956,7 +1137,7 @@
         const section = document.createElement("div");
         section.className = "topic-section";
 
-        const isOpen = true; // Open by default
+        const isOpen = true;
 
         section.innerHTML = `
           <div class="topic-header ${isOpen ? 'open' : ''}" onclick="toggleTopic(this)">
@@ -965,7 +1146,7 @@
               <span class="topic-name">${topic.category}</span>
             </div>
             <div class="topic-stats">
-              <span class="topic-badge" id="badge-${catIdx}">${topicCompleted} / ${topic.questions.length} Solved</span>
+              <span class="topic-badge" id="badge-${catIdx}">${topicCompleted} / ${topic.questions.length} ${t.solvedBadge}</span>
               <div class="topic-mini-progress">
                 <div class="topic-mini-bar" id="minibar-${catIdx}" style="width: ${(topicCompleted / topic.questions.length) * 100}%"></div>
               </div>
@@ -989,7 +1170,7 @@
                   </div>
                   <div class="question-actions">
                     <button class="btn-notes ${hasNotes ? 'has-notes' : ''}" id="btn-notes-${qId}" data-qid="${qId}" data-title="${safeTitle}" onclick="handleOpenNotes(this)">
-                      📝 ${hasNotes ? 'Edit Notes' : 'Add Notes'}
+                      ${hasNotes ? t.editNotes : t.addNotes}
                     </button>
                   </div>
                 </div>
@@ -1035,6 +1216,7 @@
     }
 
     function updateTopicBadge(catIdx) {
+      const t = i18nDict[currentLang] || i18nDict.en;
       const topic = dsaData[catIdx];
       let count = 0;
       topic.questions.forEach((q, qIdx) => {
@@ -1045,13 +1227,13 @@
       const badge = document.getElementById(`badge-${catIdx}`);
       const miniBar = document.getElementById(`minibar-${catIdx}`);
 
-      if (badge) badge.innerText = `${count} / ${topic.questions.length} Solved`;
+      if (badge) badge.innerText = `${count} / ${topic.questions.length} ${t.solvedBadge}`;
       if (miniBar) miniBar.style.width = `${(count / topic.questions.length) * 100}%`;
     }
 
     function updateEstimates() {
       let completedCount = 0;
-      const totalQuestions = 120;
+      const totalQuestions = 315;
 
       dsaData.forEach((topic, catIdx) => {
         topic.questions.forEach((q, qIdx) => {
@@ -1069,7 +1251,7 @@
       const minsLeft = totalMinutesLeft % 60;
 
       // Update DOM
-      document.getElementById("stat-completed").innerHTML = `${completedCount} <span style="font-size: 1.1rem; color: var(--text-muted);">/ 120</span>`;
+      document.getElementById("stat-completed").innerHTML = `${completedCount} <span style="font-size: 1.1rem; color: var(--text-muted);">/ 315</span>`;
       document.getElementById("stat-remaining").innerText = remainingCount;
       document.getElementById("stat-percent-text").innerText = `${percent}% Completed`;
       document.getElementById("overall-bar").style.width = `${percent}%`;
@@ -1118,6 +1300,7 @@
     }
 
     function saveNotes() {
+      const t = i18nDict[currentLang] || i18nDict.en;
       if (activeQuestionId) {
         const notesText = document.getElementById("modal-q-notes").value;
         userState.notes[activeQuestionId] = notesText;
@@ -1127,10 +1310,10 @@
         if (btn) {
           if (notesText.trim() !== "") {
             btn.classList.add("has-notes");
-            btn.innerText = "📝 Edit Notes";
+            btn.innerText = t.editNotes;
           } else {
             btn.classList.remove("has-notes");
-            btn.innerText = "📝 Add Notes";
+            btn.innerText = t.addNotes;
           }
         }
       }
@@ -1142,7 +1325,7 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userState, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `DSA_120_Progress_${new Date().toISOString().slice(0,10)}.json`);
+      downloadAnchor.setAttribute("download", `DSA_315_Progress_${new Date().toISOString().slice(0,10)}.json`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
@@ -1184,7 +1367,7 @@
 
     // INITIALIZATION
     loadState();
-    renderTopics();
+    applyTranslations();
   </script>
 </body>
 </html>
