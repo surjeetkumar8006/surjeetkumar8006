@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master DSA 100 - Interactive Progress & Time Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --bg-card: rgba(22, 31, 49, 0.7);
+      --bg-card-hover: rgba(30, 42, 67, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(16, 185, 129, 0.3);
+      --accent-green: #10b981;
+      --accent-green-glow: rgba(16, 185, 129, 0.4);
+      --accent-cyan: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --accent-pink: #ec4899;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-subtle: #6b7280;
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.08) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-bottom: 35px;
+      position: relative;
+    }
+
+    .badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #d1d5db 50%, var(--accent-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* STATS DASHBOARD */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+      opacity: 0.8;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 10px 0 4px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .stat-sub {
+      font-size: 0.85rem;
+      color: var(--text-subtle);
+    }
+
+    /* TIME ESTIMATOR CONTROLLER */
+    .time-settings-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .time-settings-info h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    .time-settings-info p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .time-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .time-controls label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    select, input[type="text"] {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--accent-green);
+    }
+
+    /* MAIN PROGRESS BAR */
+    .overall-progress-box {
+      margin-top: 10px;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 999px;
+      height: 12px;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .overall-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+      border-radius: 999px;
+      transition: width 0.4s ease-in-out;
+      box-shadow: 0 0 12px var(--accent-green-glow);
+    }
+
+    /* CONTROLS & FILTER BAR */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      background: var(--bg-card);
+      padding: 16px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: var(--text-muted);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-green:hover {
+      background: rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.3);
+    }
+
+    /* TOPIC SECTIONS */
+    .topic-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .topic-header {
+      padding: 18px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+      transition: background 0.2s ease;
+    }
+
+    .topic-header:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .topic-header.open {
+      border-bottom-color: var(--border-color);
+    }
+
+    .topic-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topic-icon {
+      font-size: 1.4rem;
+    }
+
+    .topic-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .topic-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topic-badge {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .topic-mini-progress {
+      width: 100px;
+      height: 6px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .topic-mini-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-green);
+      transition: width 0.3s ease;
+    }
+
+    .chevron-icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+
+    .topic-header.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    /* QUESTION LIST */
+    .question-list {
+      display: none;
+      padding: 12px 20px;
+    }
+
+    .question-list.open {
+      display: block;
+    }
+
+    .question-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      margin-bottom: 6px;
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid transparent;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .question-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .question-item.completed {
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .question-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .checkbox-custom {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--text-subtle);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .question-item.completed .checkbox-custom {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .checkbox-custom svg {
+      width: 14px;
+      height: 14px;
+      fill: #ffffff;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .question-item.completed .checkbox-custom svg {
+      opacity: 1;
+    }
+
+    .question-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: color 0.2s ease;
+    }
+
+    .question-item.completed .question-title {
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .question-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-notes {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-notes:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-notes.has-notes {
+      color: var(--accent-cyan);
+      border-color: rgba(6, 182, 212, 0.4);
+      background: rgba(6, 182, 212, 0.1);
+    }
+
+    /* MODAL FOR NOTES */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #111827;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 650px;
+      padding: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: #ffffff;
+    }
+
+    textarea.notes-textarea {
+      width: 100%;
+      height: 220px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      color: var(--text-main);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.875rem;
+      outline: none;
+      resize: vertical;
+      margin-bottom: 16px;
+    }
+
+    textarea.notes-textarea:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--text-subtle);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent-green);
+      text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2rem; }
+      .filter-bar { flex-direction: column; align-items: stretch; }
+      .topic-stats { gap: 8px; }
+      .topic-mini-progress { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="badge-top">
+        <span>⚡ 100 DSA Target Roadmap</span>
+      </div>
+      <h1>Master DSA 100 Tracker</h1>
+      <p class="subtitle">Track solved problems, monitor remaining topics, and calculate your remaining completion time in real-time!</p>
+    </header>
+
+    <!-- STATS DASHBOARD -->
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <div class="stat-label">
+          <span>Completed Problems</span>
+          <span>🎯</span>
+        </div>
+        <div class="stat-value" id="stat-completed">0 <span style="font-size: 1.1rem; color: var(--text-muted);">/ 100</span></div>
+        <div class="stat-sub" id="stat-percent-text">0% Completed</div>
+        <div class="overall-progress-box">
+          <div class="overall-progress-bar" id="overall-bar"></div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">
+          <span>Remaining Questions</span>
+          <span>⏳</span>
+        </div>
+        <div class="stat-value" id="stat-remaining" style="color: var(--accent-cyan);">100</div>
+        <div class="stat-sub">Problems left to master</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">
+          <span>Est. Time Remaining</span>
+          <span>⏱️</span>
+        </div>
+        <div class="stat-value" id="stat-time-left" style="color: var(--accent-purple);">41h 40m</div>
+        <div class="stat-sub" id="stat-time-sub">Based on ~25 mins/problem</div>
+      </div>
+    </div>
+
+    <!-- TIME ESTIMATOR CONTROLLER -->
+    <div class="time-settings-card">
+      <div class="time-settings-info">
+        <h3>⏱️ Dynamic Completion Time Estimator</h3>
+        <p>Select your average solving time per problem to see estimated hours left.</p>
+      </div>
+      <div class="time-controls">
+        <label for="time-per-q">Avg Time / Question:</label>
+        <select id="time-per-q" onchange="updateEstimates()">
+          <option value="15">15 Minutes (Fast)</option>
+          <option value="20">20 Minutes</option>
+          <option value="25" selected>25 Minutes (Standard)</option>
+          <option value="30">30 Minutes (Thorough)</option>
+          <option value="45">45 Minutes (Hard/Deep)</option>
+          <option value="60">60 Minutes (1 Hr/problem)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- CONTROLS & FILTER BAR -->
+    <div class="filter-bar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="search-input" placeholder="Search any question (e.g. Binary Search, Palindrome)..." onkeyup="filterQuestions()">
+      </div>
+
+      <div class="filter-group">
+        <select id="status-filter" onchange="filterQuestions()">
+          <option value="all">All Status</option>
+          <option value="completed">Completed Only</option>
+          <option value="pending">Pending Only</option>
+        </select>
+
+        <button class="btn btn-green" onclick="exportData()">💾 Export JSON</button>
+        <button class="btn" onclick="importDataTrigger()">📥 Import JSON</button>
+        <input type="file" id="import-file" style="display: none;" accept=".json" onchange="handleImportFile(event)">
+        <button class="btn btn-danger" onclick="resetAll()">🔄 Reset All</button>
+      </div>
+    </div>
+
+    <!-- TOPIC CONTAINER -->
+    <div id="topics-container"></div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>DSA 100 Questions Tracker • Designed for Maximum Productivity 🚀</p>
+    </footer>
+  </div>
+
+  <!-- NOTES / CODE MODAL -->
+  <div class="modal-overlay" id="notes-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-q-title">Notes / Solution Code</div>
+        <button class="modal-close" onclick="closeNotesModal()">&times;</button>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Save solution code, key logic takeaways, or time complexity notes here for this problem.</p>
+      <textarea class="notes-textarea" id="modal-q-notes" placeholder="// Write your solution code, pseudocode, or notes here..."></textarea>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn" onclick="closeNotesModal()">Cancel</button>
+        <button class="btn btn-green" onclick="saveNotes()">Save Notes</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // COMPLETE 100 DSA QUESTIONS DATASET
+    const dsaData = [
+      {
+        category: "1. Arrays",
+        icon: "🔹",
+        questions: [
+          "01. Find the largest element.",
+          "02. Find the smallest element.",
+          "03. Find the second largest element.",
+          "04. Find the second smallest element.",
+          "05. Reverse an array.",
+          "06. Check if an array is sorted.",
+          "07. Find the sum of all elements.",
+          "08. Find the average of array elements.",
+          "09. Search an element (Linear Search).",
+          "10. Binary Search.",
+          "11. Count even and odd numbers.",
+          "12. Move all zeros to the end.",
+          "13. Move all negative numbers to the beginning.",
+          "14. Remove duplicate elements from a sorted array.",
+          "15. Rotate an array left by one position.",
+          "16. Rotate an array right by one position.",
+          "17. Find the missing number.",
+          "18. Find duplicate elements.",
+          "19. Merge two sorted arrays.",
+          "20. Find the frequency of each element."
+        ]
+      },
+      {
+        category: "2. Strings",
+        icon: "🔤",
+        questions: [
+          "01. Reverse a string.",
+          "02. Check palindrome string.",
+          "03. Count vowels.",
+          "04. Count consonants.",
+          "05. Count words.",
+          "06. Count characters.",
+          "07. Remove spaces.",
+          "08. Remove duplicate characters.",
+          "09. Find frequency of characters.",
+          "10. Find first non-repeating character.",
+          "11. Check anagram.",
+          "12. Convert lowercase to uppercase.",
+          "13. Convert uppercase to lowercase.",
+          "14. Capitalize first letter of every word.",
+          "15. Find the longest word in a sentence."
+        ]
+      },
+      {
+        category: "3. Numbers & Math Logic",
+        icon: "🔢",
+        questions: [
+          "01. Check even or odd.",
+          "02. Find the largest of two numbers.",
+          "03. Find the largest of three numbers.",
+          "04. Swap two numbers.",
+          "05. Reverse a number.",
+          "06. Count digits.",
+          "07. Sum of digits.",
+          "08. Check palindrome number.",
+          "09. Check Armstrong number.",
+          "10. Check prime number.",
+          "11. Print all prime numbers in a range.",
+          "12. Find factorial.",
+          "13. Print Fibonacci series.",
+          "14. Check perfect number.",
+          "15. Check strong number.",
+          "16. Find GCD (HCF).",
+          "17. Find LCM.",
+          "18. Check leap year.",
+          "19. Find power without Math.pow().",
+          "20. Print multiplication table."
+        ]
+      },
+      {
+        category: "4. Patterns Printing",
+        icon: "📐",
+        questions: [
+          "01. Square star pattern.",
+          "02. Hollow square.",
+          "03. Right triangle.",
+          "04. Inverted triangle.",
+          "05. Pyramid.",
+          "06. Inverted pyramid.",
+          "07. Diamond.",
+          "08. Floyd's triangle.",
+          "09. Pascal triangle.",
+          "10. Number pyramid.",
+          "11. Number triangle.",
+          "12. Character triangle.",
+          "13. Hollow pyramid.",
+          "14. X pattern.",
+          "15. Butterfly pattern."
+        ]
+      },
+      {
+        category: "5. Recursion",
+        icon: "🔄",
+        questions: [
+          "01. Print numbers from 1 to N.",
+          "02. Print numbers from N to 1.",
+          "03. Find factorial using recursion.",
+          "04. Fibonacci using recursion.",
+          "05. Sum of first N numbers.",
+          "06. Reverse a string using recursion.",
+          "07. Reverse an array using recursion.",
+          "08. Check palindrome using recursion.",
+          "09. Binary Search using recursion.",
+          "10. Power of a number using recursion."
+        ]
+      },
+      {
+        category: "6. Sorting Algorithms",
+        icon: "🔀",
+        questions: [
+          "01. Bubble Sort.",
+          "02. Selection Sort.",
+          "03. Insertion Sort.",
+          "04. Merge Sort.",
+          "05. Quick Sort.",
+          "06. Count comparisons in Bubble Sort.",
+          "07. Stable vs Unstable Sorting concept.",
+          "08. Sort 0s and 1s.",
+          "09. Sort 0s, 1s, and 2s (Dutch National Flag).",
+          "10. Merge two sorted arrays."
+        ]
+      },
+      {
+        category: "7. Searching Algorithms",
+        icon: "🔍",
+        questions: [
+          "01. Linear Search.",
+          "02. Binary Search.",
+          "03. First occurrence using Binary Search.",
+          "04. Last occurrence using Binary Search.",
+          "05. Count occurrences using Binary Search."
+        ]
+      },
+      {
+        category: "8. Hashing",
+        icon: "🗺️",
+        questions: [
+          "01. Frequency of array elements.",
+          "02. Frequency of characters.",
+          "03. Find duplicates using HashMap / Object.",
+          "04. First unique element.",
+          "05. Two Sum problem."
+        ]
+      }
+    ];
+
+    // STATE MANAGEMENT
+    let userState = {
+      completed: {}, // id: boolean
+      notes: {}      // id: text string
+    };
+
+    let activeQuestionId = null;
+
+    // LOCAL STORAGE KEY
+    const STORAGE_KEY = "DSA_100_TRACKER_STATE_V1";
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          userState = JSON.parse(saved);
+        } catch(e) {
+          console.error("Failed to load saved state", e);
+        }
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+      updateEstimates();
+    }
+
+    function generateId(catIndex, qIndex) {
+      return `cat_${catIndex}_q_${qIndex}`;
+    }
+
+    // RENDER QUESTIONS
+    function renderTopics() {
+      const container = document.getElementById("topics-container");
+      container.innerHTML = "";
+
+      dsaData.forEach((topic, catIdx) => {
+        let topicCompleted = 0;
+
+        topic.questions.forEach((q, qIdx) => {
+          const qId = generateId(catIdx, qIdx);
+          if (userState.completed[qId]) {
+            topicCompleted++;
+          }
+        });
+
+        const section = document.createElement("div");
+        section.className = "topic-section";
+
+        const isOpen = true; // Open by default
+
+        section.innerHTML = `
+          <div class="topic-header ${isOpen ? 'open' : ''}" onclick="toggleTopic(this)">
+            <div class="topic-title-group">
+              <span class="topic-icon">${topic.icon}</span>
+              <span class="topic-name">${topic.category}</span>
+            </div>
+            <div class="topic-stats">
+              <span class="topic-badge" id="badge-${catIdx}">${topicCompleted} / ${topic.questions.length} Solved</span>
+              <div class="topic-mini-progress">
+                <div class="topic-mini-bar" id="minibar-${catIdx}" style="width: ${(topicCompleted / topic.questions.length) * 100}%"></div>
+              </div>
+              <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+          </div>
+          <div class="question-list ${isOpen ? 'open' : ''}">
+            ${topic.questions.map((q, qIdx) => {
+              const qId = generateId(catIdx, qIdx);
+              const isDone = !!userState.completed[qId];
+              const hasNotes = !!(userState.notes[qId] && userState.notes[qId].trim() !== "");
+
+              return `
+                <div class="question-item ${isDone ? 'completed' : ''}" id="item-${qId}" data-title="${q.toLowerCase()}" data-status="${isDone ? 'completed' : 'pending'}">
+                  <div class="question-left" onclick="toggleQuestion('${qId}', ${catIdx})">
+                    <div class="checkbox-custom">
+                      <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </div>
+                    <span class="question-title">${q}</span>
+                  </div>
+                  <div class="question-actions">
+                    <button class="btn-notes ${hasNotes ? 'has-notes' : ''}" id="btn-notes-${qId}" onclick="openNotesModal('${qId}', '${q.replace(/'/g, "\\'")}')">
+                      📝 ${hasNotes ? 'Edit Notes' : 'Add Notes'}
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        container.appendChild(section);
+      });
+
+      updateEstimates();
+    }
+
+    function toggleTopic(headerEl) {
+      headerEl.classList.toggle("open");
+      const listEl = headerEl.nextElementSibling;
+      listEl.classList.toggle("open");
+    }
+
+    function toggleQuestion(qId, catIdx) {
+      userState.completed[qId] = !userState.completed[qId];
+      const itemEl = document.getElementById(`item-${qId}`);
+      if (userState.completed[qId]) {
+        itemEl.classList.add("completed");
+        itemEl.setAttribute("data-status", "completed");
+      } else {
+        itemEl.classList.remove("completed");
+        itemEl.setAttribute("data-status", "pending");
+      }
+
+      saveState();
+      updateTopicBadge(catIdx);
+    }
+
+    function updateTopicBadge(catIdx) {
+      const topic = dsaData[catIdx];
+      let count = 0;
+      topic.questions.forEach((q, qIdx) => {
+        const qId = generateId(catIdx, qIdx);
+        if (userState.completed[qId]) count++;
+      });
+
+      const badge = document.getElementById(`badge-${catIdx}`);
+      const miniBar = document.getElementById(`minibar-${catIdx}`);
+
+      if (badge) badge.innerText = `${count} / ${topic.questions.length} Solved`;
+      if (miniBar) miniBar.style.width = `${(count / topic.questions.length) * 100}%`;
+    }
+
+    function updateEstimates() {
+      let completedCount = 0;
+      const totalQuestions = 100;
+
+      dsaData.forEach((topic, catIdx) => {
+        topic.questions.forEach((q, qIdx) => {
+          const qId = generateId(catIdx, qIdx);
+          if (userState.completed[qId]) completedCount++;
+        });
+      });
+
+      const remainingCount = totalQuestions - completedCount;
+      const percent = Math.round((completedCount / totalQuestions) * 100);
+
+      const minutesPerQ = parseInt(document.getElementById("time-per-q").value) || 25;
+      const totalMinutesLeft = remainingCount * minutesPerQ;
+      const hoursLeft = Math.floor(totalMinutesLeft / 60);
+      const minsLeft = totalMinutesLeft % 60;
+
+      // Update DOM
+      document.getElementById("stat-completed").innerHTML = `${completedCount} <span style="font-size: 1.1rem; color: var(--text-muted);">/ 100</span>`;
+      document.getElementById("stat-remaining").innerText = remainingCount;
+      document.getElementById("stat-percent-text").innerText = `${percent}% Completed`;
+      document.getElementById("overall-bar").style.width = `${percent}%`;
+
+      document.getElementById("stat-time-left").innerText = `${hoursLeft}h ${minsLeft}m`;
+      document.getElementById("stat-time-sub").innerText = `Based on ~${minutesPerQ} mins/problem`;
+    }
+
+    function filterQuestions() {
+      const query = document.getElementById("search-input").value.toLowerCase();
+      const statusFilter = document.getElementById("status-filter").value;
+
+      const items = document.querySelectorAll(".question-item");
+      items.forEach(item => {
+        const title = item.getAttribute("data-title");
+        const status = item.getAttribute("data-status");
+
+        const matchesSearch = title.includes(query);
+        const matchesStatus = statusFilter === "all" || status === statusFilter;
+
+        if (matchesSearch && matchesStatus) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    }
+
+    // NOTES MODAL
+    function openNotesModal(qId, title) {
+      activeQuestionId = qId;
+      document.getElementById("modal-q-title").innerText = title;
+      document.getElementById("modal-q-notes").value = userState.notes[qId] || "";
+      document.getElementById("notes-modal").classList.add("active");
+    }
+
+    function closeNotesModal() {
+      document.getElementById("notes-modal").classList.remove("active");
+      activeQuestionId = null;
+    }
+
+    function saveNotes() {
+      if (activeQuestionId) {
+        const notesText = document.getElementById("modal-q-notes").value;
+        userState.notes[activeQuestionId] = notesText;
+        saveState();
+
+        const btn = document.getElementById(`btn-notes-${activeQuestionId}`);
+        if (btn) {
+          if (notesText.trim() !== "") {
+            btn.classList.add("has-notes");
+            btn.innerText = "📝 Edit Notes";
+          } else {
+            btn.classList.remove("has-notes");
+            btn.innerText = "📝 Add Notes";
+          }
+        }
+      }
+      closeNotesModal();
+    }
+
+    // EXPORT / IMPORT / RESET
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userState, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `DSA_100_Progress_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function importDataTrigger() {
+      document.getElementById("import-file").click();
+    }
+
+    function handleImportFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed && typeof parsed === 'object') {
+            userState = parsed;
+            if (!userState.completed) userState.completed = {};
+            if (!userState.notes) userState.notes = {};
+            saveState();
+            renderTopics();
+            alert("Progress successfully imported! 🎉");
+          }
+        } catch(err) {
+          alert("Invalid JSON file!");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetAll() {
+      if (confirm("Are you sure you want to reset all progress and notes? This cannot be undone!")) {
+        userState = { completed: {}, notes: {} };
+        saveState();
+        renderTopics();
+      }
+    }
+
+    // INITIALIZATION
+    loadState();
+    renderTopics();
+  </script>
+</body>
+</html>
