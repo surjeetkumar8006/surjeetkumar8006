@@ -1,6 +1,6 @@
-# 🚀 Master DSA 100 - Ultimate Data Structures & Algorithms Tracker
+# 🚀 Master DSA 120 - Ultimate Data Structures, Algorithms & JS Methods Tracker
 
-Welcome to your personal **DSA Practice Repository**! This repository is designed to help you systematically learn, practice, and track your progress through **100 essential Data Structures & Algorithms (DSA) problems** across 8 core topics.
+Welcome to your personal **DSA Practice Repository**! This repository is designed to help you systematically learn, practice, and track your progress through **120 essential Data Structures, Algorithms & JavaScript Array Methods** across 9 core modules.
 
 ---
 
@@ -8,10 +8,10 @@ Welcome to your personal **DSA Practice Repository**! This repository is designe
 
 | Metric | Details |
 | :--- | :--- |
-| 🎯 **Total Questions** | **100 Problems** |
-| 📂 **Topics Covered** | **8 Core Modules** |
-| ⏱️ **Avg Time per Question** | **~25 - 30 Minutes** |
-| ⏳ **Total Estimated Time** | **~40 - 50 Hours** |
+| 🎯 **Total Target Items** | **120 Questions & Methods** |
+| 📂 **Topics Covered** | **9 Core Modules** |
+| ⏱️ **Avg Time per Item** | **~20 - 30 Minutes** |
+| ⏳ **Total Estimated Time** | **~45 - 55 Hours** |
 | 🌐 **Interactive Tracker** | Open [`index.html`](./index.html) in your browser! |
 
 ---
@@ -24,7 +24,7 @@ You can launch the **DSA Progress Tracker Web App** directly in your browser by 
 - 📈 **Real-time Statistics**: Shows total completed, total remaining, completion %, and dynamic time left.
 - ⏱️ **Custom Time Estimator**: Adjust your average time per problem to see exact hours left.
 - 🔍 **Search & Filter**: Search any problem by title or filter by topic and status (Completed / Pending).
-- 📝 **Code & Notes Storage**: Add notes or solution snippets for any problem right in your browser!
+- 📝 **Code & Notes Storage**: Add notes or solution snippets for any problem/method right in your browser!
 - 💾 **Auto-Save**: Progress is saved automatically in `localStorage` and can be exported/imported as JSON.
 
 ---
@@ -44,14 +44,15 @@ DSA/
 ├── 05-recursion/           # 📌 10 Questions
 ├── 06-sorting/             # 📌 10 Questions
 ├── 07-searching/           # 📌 5 Questions
-└── 08-hashing/             # 📌 5 Questions
+├── 08-hashing/             # 📌 5 Questions
+└── 09-javascript-methods/  # 📌 20 Array Methods (Part 1 to 4)
 ```
 
 ---
 
-## 📝 Complete DSA Checklist (100 Problems)
+## 📝 Complete DSA & JS Checklist (120 Items)
 
-Check off (`- [x]`) the problems as you solve them!
+Check off (`- [x]`) the problems and methods as you master them!
 
 ---
 
@@ -203,21 +204,53 @@ Check off (`- [x]`) the problems as you solve them!
 
 ---
 
+### 9. 🟨 JavaScript Essential Array Methods (20 Methods)
+*Estimated Time: ~4 - 6 Hours*
+
+#### Part 1: Basic Array Manipulation
+- [ ] 01. `push()` - Add element to end
+- [ ] 02. `pop()` - Remove element from end
+- [ ] 03. `shift()` - Remove element from start
+- [ ] 04. `unshift()` - Add element to start
+- [ ] 05. `includes()` - Check if element exists
+
+#### Part 2: Searching & Iteration
+- [ ] 06. `indexOf()` - Find first index of element
+- [ ] 07. `lastIndexOf()` - Find last index of element
+- [ ] 08. `find()` - Find first element matching condition
+- [ ] 09. `findIndex()` - Find index of first element matching condition
+- [ ] 10. `forEach()` - Iterate over array elements
+
+#### Part 3: Transformation & Filtering
+- [ ] 11. `map()` - Transform array elements into new array
+- [ ] 12. `filter()` - Filter elements matching condition
+- [ ] 13. `reduce()` - Accumulate elements into single value
+- [ ] 14. `every()` - Check if ALL elements satisfy condition
+- [ ] 15. `some()` - Check if AT LEAST ONE element satisfies condition
+
+#### Part 4: Reordering, Slicing & Combining
+- [ ] 16. `reverse()` - Reverse array in place
+- [ ] 17. `sort()` - Sort array in place
+- [ ] 18. `slice()` - Return copy of a portion of an array
+- [ ] 19. `splice()` - Add/remove/replace elements in place
+- [ ] 20. `concat()` - Merge two or more arrays
+
+---
+
 ## ⏱️ Recommended Daily Study Schedule
 
-- **1 Problem / Day**: ~100 Days (~3.5 Months)
-- **2 Problems / Day**: ~50 Days (~1.5 Months)
-- **3 Problems / Day**: ~33 Days (~1 Month)
+- **1-2 Items / Day**: ~60-120 Days (~2-4 Months)
+- **3-4 Items / Day**: ~30-40 Days (~1 Month)
 
 ---
 
 ## 🛠️ How to Add Solutions
 
-1. Navigate to the relevant folder (e.g., `01-arrays/`).
-2. Create a file named after the problem (e.g., `01-find-largest.cpp`, `01-find-largest.js`, or `01-find-largest.py`).
+1. Navigate to the relevant folder (e.g., `09-javascript-methods/`).
+2. Create a file named after the problem/method (e.g., `part1-push.js` or `01-find-largest.js`).
 3. Write your solution with clean comments and time/space complexity notes.
 4. Mark the problem as completed in [`index.html`](./index.html) or `README.md`!
 
 ---
 
-*Happy Coding & Best of Luck on your DSA Journey! 🚀*
+*Happy Coding & Best of Luck on your DSA & JavaScript Journey! 🚀*
