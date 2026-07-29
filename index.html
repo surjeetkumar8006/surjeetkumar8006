@@ -440,11 +440,13 @@
       align-items: center;
       gap: 14px;
       flex: 1;
+      cursor: pointer;
+      user-select: none;
     }
 
     .checkbox-custom {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 6px;
       border: 2px solid var(--text-subtle);
       cursor: pointer;
@@ -453,6 +455,10 @@
       justify-content: center;
       transition: all 0.2s ease;
       flex-shrink: 0;
+    }
+
+    .question-item:hover .checkbox-custom {
+      border-color: var(--accent-green);
     }
 
     .question-item.completed .checkbox-custom {
@@ -971,6 +977,7 @@
               const qId = generateId(catIdx, qIdx);
               const isDone = !!userState.completed[qId];
               const hasNotes = !!(userState.notes[qId] && userState.notes[qId].trim() !== "");
+              const safeTitle = escapeHtml(q);
 
               return `
                 <div class="question-item ${isDone ? 'completed' : ''}" id="item-${qId}" data-title="${q.toLowerCase()}" data-status="${isDone ? 'completed' : 'pending'}">
@@ -978,10 +985,10 @@
                     <div class="checkbox-custom">
                       <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     </div>
-                    <span class="question-title">${q}</span>
+                    <span class="question-title">${safeTitle}</span>
                   </div>
                   <div class="question-actions">
-                    <button class="btn-notes ${hasNotes ? 'has-notes' : ''}" id="btn-notes-${qId}" onclick="openNotesModal('${qId}', '${q.replace(/'/g, "\\'")}')">
+                    <button class="btn-notes ${hasNotes ? 'has-notes' : ''}" id="btn-notes-${qId}" data-qid="${qId}" data-title="${safeTitle}" onclick="handleOpenNotes(this)">
                       📝 ${hasNotes ? 'Edit Notes' : 'Add Notes'}
                     </button>
                   </div>
@@ -995,6 +1002,15 @@
       });
 
       updateEstimates();
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
 
     function toggleTopic(headerEl) {
@@ -1083,9 +1099,15 @@
     }
 
     // NOTES MODAL
+    function handleOpenNotes(btnEl) {
+      const qId = btnEl.getAttribute("data-qid");
+      const title = btnEl.getAttribute("data-title");
+      openNotesModal(qId, title);
+    }
+
     function openNotesModal(qId, title) {
       activeQuestionId = qId;
-      document.getElementById("modal-q-title").innerText = title;
+      document.getElementById("modal-q-title").innerHTML = title;
       document.getElementById("modal-q-notes").value = userState.notes[qId] || "";
       document.getElementById("notes-modal").classList.add("active");
     }
