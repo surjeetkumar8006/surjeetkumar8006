@@ -4,7 +4,7 @@ Use this directory to store your code solutions for **Array** problems (e.g. `01
 
 ## 📋 Problem List
 
-- [ ] 01. Find the largest element.
+- [x] 01. Find the largest element.
 - [ ] 02. Find the smallest element.
 - [ ] 03. Find the second largest element.
 - [ ] 04. Find the second smallest element.
