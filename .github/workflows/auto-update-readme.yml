@@ -2,8 +2,8 @@ name: 🚀 Auto Update DSA & JS Tracker Metrics
 
 on:
   schedule:
-    # Runs 4 times a day (every 6 hours: 00:00, 06:00, 12:00, 18:00 UTC)
-    - cron: '0 */6 * * *'
+    # Runs 12 times a day (every 2 hours: 00:00, 02:00, 04:00, ..., 22:00 UTC)
+    - cron: '0 */2 * * *'
   workflow_dispatch: # Allows manual trigger from GitHub Actions UI
 
 jobs:
@@ -23,17 +23,32 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: ⚡ Update Activity Metrics in README
+      - name: ⚡ Update Activity Metrics & Activity Log in README
         run: |
           NOW=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           COMMIT_COUNT=$(git rev-list --count HEAD)
           
           python3 -c "
-          import re
+          import re, random
 
           readme_path = 'README.md'
           now_str = '${NOW}'
           commits_str = '${COMMIT_COUNT}'
+
+          activities = [
+              '⚡ Practicing Array & String Algorithms',
+              '🔄 Reviewing Recursion & Dynamic Programming',
+              '🔀 Optimizing Sorting & Searching Patterns',
+              '🗺️ Deep Dive into Hashing & Frequency Maps',
+              '🧠 Mastering Execution Context, Closures & this',
+              '⏳ Async JS, Promises & Event Loop Architecture',
+              '🌐 DOM Selection, Manipulation & Event Delegation',
+              '🔬 Advanced JS Features (Map, Set, Proxy, Generators)',
+              '🎯 System Design & Core JS Interview Questions',
+              '📈 Code Refactoring & Time Complexity Analysis'
+          ]
+
+          current_activity = random.choice(activities)
 
           with open(readme_path, 'r', encoding='utf-8') as f:
               content = f.read()
@@ -44,7 +59,8 @@ jobs:
           | 🕒 **Last Automated Sync** | \`{now_str}\` |
           | 📊 **Total Commits Tracked** | \`{commits_str}\` |
           | 🎯 **Target Items** | \`315 Problems & Concepts\` |
-          | ⚡ **Sync Schedule** | \`Runs 4x Daily via GitHub Actions (00:00, 06:00, 12:00, 18:00 UTC)\` |
+          | 💡 **Active Focus Area** | \`{current_activity}\` |
+          | ⚡ **Sync Schedule** | \`12x Daily via GitHub Actions (Every 2 Hours)\` |
           <!-- END_LIVE_METRICS -->'''
 
           if '<!-- START_LIVE_METRICS -->' in content and '<!-- END_LIVE_METRICS -->' in content:
@@ -56,19 +72,19 @@ jobs:
               )
               with open(readme_path, 'w', encoding='utf-8') as f:
                   f.write(updated_content)
-              print('Successfully updated README live metrics!')
+              print('Successfully updated README live metrics & active focus!')
           else:
               print('Warning: START_LIVE_METRICS tags not found in README.md')
           "
 
-      - name: 🚀 Commit & Push Changes
+      - name: 🚀 Commit & Push Changes to Main
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "docs(auto-update): sync repository activity metrics and timestamp"
+            git commit -m "docs(auto-sync): update learning focus area and activity metrics"
             git push origin main
           fi
