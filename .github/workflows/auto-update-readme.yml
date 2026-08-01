@@ -79,8 +79,8 @@ jobs:
 
       - name: 🚀 Commit & Push Changes to Main
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "surjeetkumar8006"
+          git config user.email "surjeetyadav80067@gmail.com"
           git add README.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
