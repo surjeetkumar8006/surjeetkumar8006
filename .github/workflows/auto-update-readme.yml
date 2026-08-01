@@ -1,0 +1,74 @@
+name: 🚀 Auto Update DSA & JS Tracker Metrics
+
+on:
+  schedule:
+    # Runs 4 times a day (every 6 hours: 00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: ⚡ Update Activity Metrics in README
+        run: |
+          NOW=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          
+          python3 -c "
+          import re
+
+          readme_path = 'README.md'
+          now_str = '${NOW}'
+          commits_str = '${COMMIT_COUNT}'
+
+          with open(readme_path, 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          new_metrics = f'''<!-- START_LIVE_METRICS -->
+          | Metric | Real-Time Value |
+          | :--- | :--- |
+          | 🕒 **Last Automated Sync** | \`{now_str}\` |
+          | 📊 **Total Commits Tracked** | \`{commits_str}\` |
+          | 🎯 **Target Items** | \`315 Problems & Concepts\` |
+          | ⚡ **Sync Schedule** | \`Runs 4x Daily via GitHub Actions (00:00, 06:00, 12:00, 18:00 UTC)\` |
+          <!-- END_LIVE_METRICS -->'''
+
+          if '<!-- START_LIVE_METRICS -->' in content and '<!-- END_LIVE_METRICS -->' in content:
+              updated_content = re.sub(
+                  r'<!-- START_LIVE_METRICS -->.*?<!-- END_LIVE_METRICS -->',
+                  new_metrics,
+                  content,
+                  flags=re.DOTALL
+              )
+              with open(readme_path, 'w', encoding='utf-8') as f:
+                  f.write(updated_content)
+              print('Successfully updated README live metrics!')
+          else:
+              print('Warning: START_LIVE_METRICS tags not found in README.md')
+          "
+
+      - name: 🚀 Commit & Push Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]"
+          git add README.md
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "docs(auto-update): sync repository activity metrics and timestamp"
+            git push origin main
+          fi

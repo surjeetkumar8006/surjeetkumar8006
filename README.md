@@ -28,6 +28,19 @@ Select your preferred language in the top bar of [`index.html`](./index.html) to
 
 ---
 
+## 🤖 Live Automated Repository Activity & Metrics
+
+<!-- START_LIVE_METRICS -->
+| Metric | Real-Time Value |
+| :--- | :--- |
+| 🕒 **Last Automated Sync** | `2026-08-01 11:15:00 UTC` |
+| 📊 **Total Commits Tracked** | `15` |
+| 🎯 **Target Items** | `315 Problems & Concepts` |
+| ⚡ **Sync Schedule** | `Runs 4x Daily via GitHub Actions (00:00, 06:00, 12:00, 18:00 UTC)` |
+<!-- END_LIVE_METRICS -->
+
+---
+
 ## 📁 Clean Repository Structure
 
 ```text
