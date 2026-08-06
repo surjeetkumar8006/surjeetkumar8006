@@ -108,42 +108,11 @@ const surjeet = {
 
 ---
 
-## 🚀 What I'm Working On
-
-<table align="center">
-<tr>
-<td align="center" width="60">🔹</td>
-<td><b>Full Stack MERN & Next.js Applications</b></td>
-</tr>
-<tr>
-<td align="center">🔹</td>
-<td><b>Authentication & Authorization Systems (JWT, OAuth)</b></td>
-</tr>
-<tr>
-<td align="center">🔹</td>
-<td><b>REST APIs & High-Performance Backend Architecture</b></td>
-</tr>
-<tr>
-<td align="center">🔹</td>
-<td><b>AWS Cloud Infrastructure & Automated Deployments</b></td>
-</tr>
-<tr>
-<td align="center">🔹</td>
-<td><b>Docker Containerization & Kubernetes Orchestration</b></td>
-</tr>
-<tr>
-<td align="center">🔹</td>
-<td><b>System Design & Data Structures Optimization</b></td>
-</tr>
-</table>
-
----
-
-## 💡 Developer Quote & Motto
+## 💡 Quote
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=160&section=footer&color=gradient&customColorList=12&text=%E2%80%9CTurning%20Complex%20Problems%20Into%20Elegant%20Code%E2%80%9D&fontSize=22&fontColor=ffffff&fontAlignY=40&desc=-%20Surjeet%20Kumar%20%7C%20Full%20Stack%20Software%20Engineer&descSize=16&descAlignY=68" width="98%" />
+<img src="https://capsule-render.vercel.app/api?type=rect&height=160&color=161b22&stroke=30363d&strokeWidth=2&text=%E2%80%9CTurning%20Complex%20Problems%20Into%20Elegant%20Code%E2%80%9D&fontSize=20&fontColor=58A6FF&fontAlignY=42&desc=-%20Surjeet%20Kumar%20(Full%20Stack%20Software%20Engineer)&descSize=15&descAlignY=76&descColor=8b949e" width="650" />
 
 </div>
 
