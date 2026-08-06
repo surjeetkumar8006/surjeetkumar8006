@@ -143,7 +143,7 @@ const surjeet = {
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=150&section=footer&color=0:0F2027,50:203A43,100:2C5364&text=%E2%80%9CTurning%20Complex%20Problems%20Into%20Elegant%20Code%E2%80%9D&fontSize=22&fontColor=58A6FF&fontAlignY=38&desc=-%20Surjeet%20Kumar%20%7C%20Full%20Stack%20Software%20Engineer&descSize=16&descAlignY=68" width="98%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=160&section=footer&color=gradient&customColorList=12&text=%E2%80%9CTurning%20Complex%20Problems%20Into%20Elegant%20Code%E2%80%9D&fontSize=22&fontColor=ffffff&fontAlignY=40&desc=-%20Surjeet%20Kumar%20%7C%20Full%20Stack%20Software%20Engineer&descSize=16&descAlignY=68" width="98%" />
 
 </div>
 
