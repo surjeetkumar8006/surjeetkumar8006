@@ -1,0 +1,35 @@
+name: 🌟 Generate GitHub 3D Contribution Graph
+
+on:
+  schedule:
+    # Runs daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🌟 Generate 3D Contribution Graph SVGs
+        uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: surjeetkumar8006
+
+      - name: 🚀 Commit & Push Generated 3D Graph SVGs
+        run: |
+          git config user.name "surjeetkumar8006"
+          git config user.email "surjeetyadav80067@gmail.com"
+          git add -A .
+          if git diff --staged --quiet; then
+            echo "No changes in 3D graph."
+          else
+            git commit -m "docs: auto-generate 3D contribution graph SVGs"
+            git push origin main
+          fi

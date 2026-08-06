@@ -118,6 +118,16 @@ const surjeet = {
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=surjeetkumar8006&theme=github-dark&hide_border=true" width="98%" />
 </p>
 
+### 🌟 3D Contribution Graph & Activity Wall
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-night-rainbow.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-git-block.svg" />
+    <img src="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Graph" width="98%" />
+  </picture>
+</div>
+
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=surjeetkumar8006&theme=github-dark&hide_border=true&area=true" width="98%" />
 </p>
