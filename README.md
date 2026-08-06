@@ -89,11 +89,7 @@ const surjeet = {
 ### 🐍 Contribution Snake Animation
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/github-contribution-grid-snake-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/github-contribution-grid-snake.svg" />
-    <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/github-contribution-grid-snake-dark.svg" width="98%" />
-  </picture>
+  <img src="./github-contribution-grid-snake-dark.svg" alt="GitHub Contribution Snake Animation" width="98%" />
 </div>
 
 <br/><br/>
