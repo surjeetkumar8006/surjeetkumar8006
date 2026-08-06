@@ -124,6 +124,8 @@ const surjeet = {
   <img src="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/profile-3d-contrib/profile-night-rainbow.svg" alt="Surjeet's 3D Contribution Graph" width="98%" />
 </div>
 
+<br/><br/>
+
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=surjeetkumar8006&theme=github-dark&hide_border=true&area=true" width="98%" />
 </p>
