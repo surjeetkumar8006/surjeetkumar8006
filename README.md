@@ -86,6 +86,18 @@ const surjeet = {
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=surjeetkumar8006&theme=github-dark&hide_border=true" width="98%" />
 </p>
 
+### 🐍 Contribution Snake Animation
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/github-contribution-grid-snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/github-contribution-grid-snake.svg" />
+    <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/surjeetkumar8006/surjeetkumar8006/main/github-contribution-grid-snake-dark.svg" width="98%" />
+  </picture>
+</div>
+
+<br/><br/>
+
 ### 🌟 3D Contribution Graph & Activity Wall
 
 <div align="center">

@@ -1,0 +1,38 @@
+name: 🐍 Generate Contribution Snake Animation
+
+on:
+  schedule:
+    # Runs daily at midnight UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch: # Allows manual trigger anytime from GitHub Actions UI
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Generate github-contribution-grid-snake.svg
+        uses: platane/snk/svg-only@v3
+        with:
+          github_user_name: surjeetkumar8006
+          outputs: |
+            github-contribution-grid-snake.svg
+            github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      - name: 🚀 Commit & Push Snake SVGs
+        run: |
+          git config user.name "surjeetkumar8006"
+          git config user.email "surjeetyadav80067@gmail.com"
+          git add github-contribution-grid-snake.svg github-contribution-grid-snake-dark.svg
+          if git diff --staged --quiet; then
+            echo "No changes in snake SVGs."
+          else
+            git commit -m "docs: auto-generate contribution snake animation"
+            git push origin main
+          fi
