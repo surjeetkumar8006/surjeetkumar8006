@@ -1,219 +1,192 @@
-# 🚀 Master DSA & JavaScript 315 - Complete Learning & Tracking Roadmap
+# 👋 Hi, I'm Surjeet Kumar
 
-Welcome to your personal **DSA & Full-Stack JavaScript Mastery Repository**! This repository tracks **315 essential Data Structures, Algorithms, Core JavaScript Concepts, Web APIs, DOM Manipulation, and Advanced JS Design Patterns**.
+<div align="center">
 
----
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:0F2027,50:203A43,100:2C5364&text=Surjeet%20Kumar&fontSize=45&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Full%20Stack%20Software%20Engineer&descAlignY=55&descSize=18" width="100%"/>
 
-## 🌐 Multi-Language Support / 多语言支持 / Mehrsprachige Unterstützung
+<br/>
 
-The interactive Web Tracker ([`index.html`](./index.html)) supports **3 Languages**:
-- 🇬🇧 **English** (Default)
-- 🇩🇪 **Deutsch (German)**
-- 🇨🇳 **中文 (Chinese)**
+<p align="center">
+  <img
+    src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&duration=3000&pause=1200&color=58A6FF&center=true&vCenter=true&repeat=true&width=850&height=90&lines=Full+Stack+Software+Engineer;MERN+Stack+%7C+Next.js+Developer;Building+Scalable+Backend+Systems"
+    alt="Typing SVG"
+  />
+</p>
 
-Select your preferred language in the top bar of [`index.html`](./index.html) to instantly translate all stats, categories, and controls!
+<p>
+  <img src="https://img.shields.io/badge/Open%20to%20Work-success?style=for-the-badge&logo=briefcase&logoColor=white" />
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=surjeetkumar8006.surjeetkumar8006&style=for-the-badge&color=58A6FF&text=Profile%20Views" />
+  <img src="https://img.shields.io/github/followers/surjeetkumar8006?label=Followers&style=for-the-badge&color=58A6FF" />
+</p>
 
----
-
-## 📊 Roadmap Overview & Time Estimates
-
-| Metric | Details |
-| :--- | :--- |
-| 🎯 **Total Target Items** | **315 Problems, Methods & Concepts** |
-| 📂 **Core Modules** | **8 DSA Modules + 1 Master JS Module** |
-| ⏱️ **Avg Time per Item** | **~25 - 30 Minutes** |
-| ⏳ **Total Estimated Time** | **~130 - 150 Hours** |
-| 🌍 **Languages Supported** | **English (EN), German (DE), Chinese (ZH)** |
-| ⚡ **Interactive Web App** | Launch [`index.html`](./index.html) in your browser |
+</div>
 
 ---
 
-## 🤖 Live Automated Repository Activity & Metrics
+## 🤖 Live Automated Profile Activity
 
 <!-- START_LIVE_METRICS -->
 | Metric | Real-Time Value |
 | :--- | :--- |
-| 🕒 **Last Automated Sync** | `2026-08-01 05:47:39 UTC` |
-| 📊 **Total Commits Tracked** | `8` |
+| 🕒 **Last Automated Sync** | `2026-08-06 11:15:00 UTC` |
+| 📊 **Total Commits Tracked** | `25` |
 | 🎯 **Target Items** | `315 Problems & Concepts` |
-| 💡 **Active Focus Area** | `🔄 Reviewing Recursion & Dynamic Programming` |
+| 💡 **Active Focus Area** | `⚡ Practicing Array & String Algorithms` |
 | ⚡ **Sync Schedule** | `12x Daily via GitHub Actions (Every 2 Hours)` |
 <!-- END_LIVE_METRICS -->
 
 ---
 
-## 📁 Clean Repository Structure
+## 🧑‍💻 About Me
 
-```text
-DSA/
-│
-├── index.html                                        # 🌐 Multi-Language Interactive Web Tracker
-├── README.md                                         # 📜 Master GitHub Documentation & Checklist
-│
-├── 01-arrays/                                        # 📌 DSA: 20 Array Problems
-├── 02-strings/                                       # 📌 DSA: 15 String Problems
-├── 03-numbers/                                       # 📌 DSA: 20 Math & Number Problems
-├── 04-patterns/                                      # 📌 DSA: 15 Star & Number Patterns
-├── 05-recursion/                                     # 📌 DSA: 10 Recursion Problems
-├── 06-sorting/                                       # 📌 DSA: 10 Sorting Algorithms
-├── 07-searching/                                     # 📌 DSA: 5 Searching Algorithms
-├── 08-hashing/                                       # 📌 DSA: 5 Hashing Problems
-│
-└── javascript-fundamentals-and-interview-preparation/ # 🟨 ALL JavaScript Topics (215 Items) in 1 Master Folder!
+```javascript
+const surjeet = {
+  location: "India 🇮🇳",
+  role: "Full Stack Software Engineer",
+  code: ["JavaScript", "TypeScript", "Java", "C++", "HTML/CSS"],
+  technologies: {
+    frontEnd: ["React", "Next.js", "Tailwind CSS", "Redux"],
+    backEnd: ["Node.js", "Express"],
+    databases: ["MongoDB", "PostgreSQL", "MySQL"],
+    cloudDevOps: ["AWS", "Docker", "Kubernetes"],
+    tools: ["Git", "GitHub", "VS Code", "Postman"]
+  },
+  currentFocus: "Building scalable web applications, REST APIs & mastering DSA",
+  funFact: "I turn ☕ into 💻"
+};
 ```
 
 ---
 
-## 📝 Complete Master Checklist (315 Items)
+## 🛠️ Tech Stack
+
+<div align="center">
+
+### 🖥️ Frontend
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+<img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white" />
+
+<br/><br/>
+
+### ⚙️ Backend & Languages
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+<img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" />
+
+<br/><br/>
+
+### 🗄️ Databases
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+
+<br/><br/>
+
+### ☁️ Cloud & DevOps
+<img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" />
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+<img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" />
+<img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
+
+<br/><br/>
+
+### 🛠️ Tools & Workflow
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
+<img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" />
+<img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" />
+
+</div>
 
 ---
 
-### 1. 🔹 DSA: Arrays (20 Questions)
-- [ ] 01. Find the largest element.
-- [ ] 02. Find the smallest element.
-- [ ] 03. Find the second largest element.
-- [ ] 04. Find the second smallest element.
-- [ ] 05. Reverse an array.
-- [ ] 06. Check if an array is sorted.
-- [ ] 07. Find the sum of all elements.
-- [ ] 08. Find the average of array elements.
-- [ ] 09. Search an element (Linear Search).
-- [ ] 10. Binary Search.
-- [ ] 11. Count even and odd numbers.
-- [ ] 12. Move all zeros to the end.
-- [ ] 13. Move all negative numbers to the beginning.
-- [ ] 14. Remove duplicate elements from a sorted array.
-- [ ] 15. Rotate an array left by one position.
-- [ ] 16. Rotate an array right by one position.
-- [ ] 17. Find the missing number.
-- [ ] 18. Find duplicate elements.
-- [ ] 19. Merge two sorted arrays.
-- [ ] 20. Find the frequency of each element.
+## 📊 GitHub Analytics
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=surjeetkumar8006&show_icons=true&theme=github_dark&hide_border=true&count_private=true" width="49%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=surjeetkumar8006&layout=compact&theme=github_dark&hide_border=true" width="48%" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=surjeetkumar8006&theme=github-dark&hide_border=true" width="98%" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=surjeetkumar8006&theme=github-dark&hide_border=true&area=true" width="98%" />
+</p>
 
 ---
 
-### 2. 🔤 DSA: Strings (15 Questions)
-- [ ] 01. Reverse a string.
-- [ ] 02. Check palindrome string.
-- [ ] 03. Count vowels.
-- [ ] 04. Count consonants.
-- [ ] 05. Count words.
-- [ ] 06. Count characters.
-- [ ] 07. Remove spaces.
-- [ ] 08. Remove duplicate characters.
-- [ ] 09. Find frequency of characters.
-- [ ] 10. Find first non-repeating character.
-- [ ] 11. Check anagram.
-- [ ] 12. Convert lowercase to uppercase.
-- [ ] 13. Convert uppercase to lowercase.
-- [ ] 14. Capitalize first letter of every word.
-- [ ] 15. Find the longest word in a sentence.
+## 🚀 What I'm Working On
+
+<table align="center">
+<tr>
+<td align="center" width="60">🔹</td>
+<td><b>Full Stack MERN & Next.js Applications</b></td>
+</tr>
+<tr>
+<td align="center">🔹</td>
+<td><b>Authentication & Authorization Systems (JWT, OAuth)</b></td>
+</tr>
+<tr>
+<td align="center">🔹</td>
+<td><b>REST APIs & High-Performance Backend Architecture</b></td>
+</tr>
+<tr>
+<td align="center">🔹</td>
+<td><b>AWS Cloud Infrastructure & Automated Deployments</b></td>
+</tr>
+<tr>
+<td align="center">🔹</td>
+<td><b>Docker Containerization & Kubernetes Orchestration</b></td>
+</tr>
+<tr>
+<td align="center">🔹</td>
+<td><b>System Design & Data Structures Optimization</b></td>
+</tr>
+</table>
 
 ---
 
-### 3. 🔢 DSA: Numbers & Math Logic (20 Questions)
-- [ ] 01. Check even or odd.
-- [ ] 02. Find the largest of two numbers.
-- [ ] 03. Find the largest of three numbers.
-- [ ] 04. Swap two numbers.
-- [ ] 05. Reverse a number.
-- [ ] 06. Count digits.
-- [ ] 07. Sum of digits.
-- [ ] 08. Check palindrome number.
-- [ ] 09. Check Armstrong number.
-- [ ] 10. Check prime number.
-- [ ] 11. Print all prime numbers in a range.
-- [ ] 12. Find factorial.
-- [ ] 13. Print Fibonacci series.
-- [ ] 14. Check perfect number.
-- [ ] 15. Check strong number.
-- [ ] 16. Find GCD (HCF).
-- [ ] 17. Find LCM.
-- [ ] 18. Check leap year.
-- [ ] 19. Find power without `Math.pow()`.
-- [ ] 20. Print multiplication table.
+## 💡 Developer Quote
+
+<div align="center">
+
+<img src="https://readme-daily-quotes.vercel.app/api?theme=dark&card_width=600" />
+
+</div>
 
 ---
 
-### 4. 📐 DSA: Patterns Printing (15 Questions)
-- [ ] 01. Square star pattern.
-- [ ] 02. Hollow square.
-- [ ] 03. Right triangle.
-- [ ] 04. Inverted triangle.
-- [ ] 05. Pyramid.
-- [ ] 06. Inverted pyramid.
-- [ ] 07. Diamond.
-- [ ] 08. Floyd's triangle.
-- [ ] 09. Pascal triangle.
-- [ ] 10. Number pyramid.
-- [ ] 11. Number triangle.
-- [ ] 12. Character triangle.
-- [ ] 13. Hollow pyramid.
-- [ ] 14. X pattern.
-- [ ] 15. Butterfly pattern.
+## 🤝 Connect With Me
 
----
+<p align="center">📫 Reach out to me at <b>Surjeetyadav80067@gmail.com</b></p>
 
-### 5. 🔄 DSA: Recursion (10 Questions)
-- [ ] 01. Print numbers from 1 to N.
-- [ ] 02. Print numbers from N to 1.
-- [ ] 03. Find factorial using recursion.
-- [ ] 04. Fibonacci using recursion.
-- [ ] 05. Sum of first N numbers.
-- [ ] 06. Reverse a string using recursion.
-- [ ] 07. Reverse an array using recursion.
-- [ ] 08. Check palindrome using recursion.
-- [ ] 09. Binary Search using recursion.
-- [ ] 10. Power of a number using recursion.
+<p align="center">
+<a href="mailto:Surjeetyadav80067@gmail.com">
+<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
+</a>
+<a href="https://linkedin.com/in/surjeetkumar8">
+<img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+</a>
+<a href="https://github.com/surjeetkumar8006">
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+</a>
+</p>
 
----
+<div align="center">
 
-### 6. 🔀 DSA: Sorting Algorithms (10 Questions)
-- [ ] 01. Bubble Sort.
-- [ ] 02. Selection Sort.
-- [ ] 03. Insertion Sort.
-- [ ] 04. Merge Sort.
-- [ ] 05. Quick Sort.
-- [ ] 06. Count comparisons in Bubble Sort.
-- [ ] 07. Stable vs Unstable Sorting.
-- [ ] 08. Sort 0s and 1s.
-- [ ] 09. Sort 0s, 1s, and 2s (Dutch National Flag).
-- [ ] 10. Merge two sorted arrays.
+⭐ **If you like my work, consider giving a star to my repositories!**
 
----
+<img src="https://komarev.com/ghpvc/?username=surjeetkumar8006&label=Profile+Views&color=58A6FF&style=flat-square" />
 
-### 7. 🔍 DSA: Searching Algorithms (5 Questions)
-- [ ] 01. Linear Search.
-- [ ] 02. Binary Search.
-- [ ] 03. First occurrence using Binary Search.
-- [ ] 04. Last occurrence using Binary Search.
-- [ ] 05. Count occurrences using Binary Search.
+<img src="https://capsule-render.vercel.app/api?type=waving&height=120&section=footer&color=0:2C5364,50:203A43,100:0F2027"/>
 
----
-
-### 8. 🗺️ DSA: Hashing (5 Questions)
-- [ ] 01. Frequency of array elements.
-- [ ] 02. Frequency of characters.
-- [ ] 03. Find duplicates using HashMap.
-- [ ] 04. First unique element.
-- [ ] 05. Two Sum problem.
-
----
-
-### 9. 🟨 JavaScript Fundamentals & Interview Preparation (215 Items)
-👉 Open [`javascript-fundamentals-and-interview-preparation/README.md`](./javascript-fundamentals-and-interview-preparation/README.md) for full topic details!
-
-- **Part 1**: JS Basics, Variables & Control Flow (12 Topics)
-- **Part 2**: Functions, Arrow Functions & Scope (14 Topics)
-- **Part 3**: Objects, Classes & OOP (17 Topics)
-- **Part 4**: Array & String Built-in Methods (27 Methods)
-- **Part 5**: Execution Context, Closures & `this` (16 Topics)
-- **Part 6**: Async Programming, Event Loop & Fetch API (24 Topics)
-- **Part 7**: DOM Selection, Manipulation & Events (30 Topics)
-- **Part 8**: Web APIs, Math, Date, JSON, Storage & Regex (32 Topics)
-- **Part 9**: Advanced JS Data Structures & Features (30 Topics)
-- **Part 10**: Top 18 JS Core Interview Questions & Comparisons (18 Topics)
-
----
-
-*Happy Learning & Good Luck Mastering DSA & Full-Stack JavaScript! 🚀*
+</div>
