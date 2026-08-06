@@ -121,11 +121,7 @@ const surjeet = {
 ### 🌟 3D Contribution Graph & Activity Wall
 
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-night-rainbow.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-git-block.svg" />
-    <img src="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Graph" width="98%" />
-  </picture>
+  <img src="https://raw.githubusercontent.com/surjeetkumar8006/DSA-/main/profile-3d-contrib/profile-night-rainbow.svg" alt="Surjeet's 3D Contribution Graph" width="98%" />
 </div>
 
 <p align="center">
