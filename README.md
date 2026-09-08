@@ -6,6 +6,7 @@
 
 <br/>
 
+
 <p align="center">
   <img
     src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=30&duration=3000&pause=1200&color=58A6FF&center=true&vCenter=true&repeat=true&width=850&height=90&lines=Full+Stack+Software+Engineer;MERN+Stack+%7C+Next.js+Developer;Building+Scalable+Backend+Systems"
