@@ -1,4 +1,4 @@
-<img width="1320" height="840" alt="image" src="https://github.com/user-attachments/assets/13621c63-4760-4c41-9ce4-e45fe27b9585" /># 👋 Hi, I'm Surjeet Kumar
+# 👋 Hi, I'm Surjeet Kumar
 
 <div align="center">
 
